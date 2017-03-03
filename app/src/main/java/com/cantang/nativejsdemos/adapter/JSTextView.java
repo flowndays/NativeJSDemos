@@ -32,7 +32,4 @@ public class JSTextView extends JSView {
         setHintRelay.accept(hint);
     }
 
-    public void inject(String jsName) {
-        webView.addJavascriptInterface(this, jsName);
-    }
 }

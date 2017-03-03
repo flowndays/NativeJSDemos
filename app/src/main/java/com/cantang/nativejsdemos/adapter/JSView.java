@@ -1,6 +1,7 @@
 package com.cantang.nativejsdemos.adapter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -14,6 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  */
 
 public class JSView {
+    private static final String TAG = "JSView";
     private View view;
     private final PublishRelay<Boolean> setEnableRelay = PublishRelay.create();
     private final PublishRelay<Integer> setVisibilityRelay = PublishRelay.create();
@@ -30,12 +32,13 @@ public class JSView {
         webView = jsWebViewProvider.createWebView(view.getContext());
     }
 
-    public void loadUrl(@NonNull String url) {
-        webView.loadUrl(url);
+    public void loadData(@NonNull String data) {
+        Log.d(TAG, "loading:\n" + data);
+        webView.loadData(data, "text/html", "utf-8");
     }
 
-    public void loadData(@NonNull String data) {
-        webView.loadData(data, "text/html", "utf-8");
+    public void inject(String jsName) {
+        webView.addJavascriptInterface(this, jsName);
     }
 
     @JavascriptInterface

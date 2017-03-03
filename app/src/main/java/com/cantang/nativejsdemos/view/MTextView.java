@@ -6,25 +6,7 @@ import android.widget.TextView;
 import com.cantang.nativejsdemos.adapter.JSTextView;
 import com.cantang.nativejsdemos.adapter.JSWebViewProvider;
 
-/**
- * Composite approach of JS TextView
- */
-
 public class MTextView {
-
-    private static final String template = "<!DOCTYPE html>\n" +
-            "<html>\n" +
-            "<head>\n" +
-            "    <script type=\"text/javascript\">\n" +
-            "\n" +
-            "        function onLoad(){\n" +
-            "            [$js_script]\n" +
-            "        }\n" +
-            "\n" +
-            "        window.onload = onLoad;\n" +
-            "    </script>\n" +
-            "</head>\n" +
-            "</html>";
 
     private static final String SET_TEXT_SCRIPT_TEMPLATE = "%1$s.setTextJS('%2$s');";
 
@@ -42,7 +24,7 @@ public class MTextView {
     }
 
     private String merge(String data) {
-        return template.replace("[$js_script]", String.format(SET_TEXT_SCRIPT_TEMPLATE, jsName, data));
+        return JSTemplate.of(String.format(SET_TEXT_SCRIPT_TEMPLATE, jsName, data));
     }
 
 }
